@@ -14,7 +14,6 @@ export const getBoardList = userId => dispatch => {
   api
     .post('/user/boards', { userId: userId })
     .then(res => {
-      console.log(res.data.data);
       dispatch(setCurrentBoards(res.data.data))
     })
     .catch(err =>

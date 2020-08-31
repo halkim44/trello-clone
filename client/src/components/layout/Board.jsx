@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { connect } from "react-redux";
 import { api } from '../../api';
 import isEmpty from 'is-empty';
@@ -6,6 +6,9 @@ import store from '../../store';
 import { List } from './List';
 import { AddCard } from '../AddCard';
 import { Card } from './Card';
+import { Navbar } from './Navbar';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
 export const Board = props =>{
   
@@ -13,12 +16,28 @@ export const Board = props =>{
   const [cards, setCards] = useState([]);
   const [list, setList] = useState([]);
   const [formData, setFormData] = useState({})
+  const [displayListComposer, setDisplayListComposer] = useState(false)
   
   const boardId = props.location.pathname.split("/")[2];
   const state = store.getState();
+  const wrapperRef = useRef(null);
 
   useEffect(() => {
+
     console.log('board updated');
+
+    if(displayListComposer) {
+
+      const input = document.querySelector('.list-composer input');
+
+      function handleClickOutside(event) {
+          if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+            setDisplayListComposer(false)
+          }
+      }
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
     if (isEmpty(board)) {
       (id => {
         api
@@ -44,9 +63,9 @@ export const Board = props =>{
           })
       })(boardId)
     }
+  }, [displayListComposer])
 
 
-  }, [])
 
 
   const createList = e => {
@@ -83,8 +102,10 @@ export const Board = props =>{
 
         return (
         <List list={list}>
-          { listCards }
-          <AddCard boardId={ boardId } listId={ list._id } addCardToState={newCard => setCards([...cards, newCard])}/>
+          <div className="cards-container">
+            { listCards }
+            <AddCard boardId={ boardId } listId={ list._id } addCardToState={newCard => setCards([...cards, newCard])}/>
+          </div>
         </List>
         )
       })
@@ -97,28 +118,54 @@ export const Board = props =>{
 
 
   return (
-    <div>
-      <h1>{board.title}</h1>
-      <form onSubmit={createList}>
-        { console.log(board) }
-        <div>
-          <input
-            type="text"
-            id="listTitle"
-            placeholder="Enter list title ..."
-            onChange={onChange}
-         />
+    <>
+      <Navbar />
+      
+      <div className="board-title-wrapper level is-size-5 has-background-info">
+        <div className="level-left">
+          <div className="level-item">
+            <h1 className="board-title has-text-light">{board.title}</h1>
+          </div>
         </div>
-        <div>
-          <button type="submit">
-            Add List
-          </button>
-        </div>
-      </form>
-      <div className="board-canvas">
-        {displayLists(list)}
       </div>
-    </div>
+      <div className="workspace has-background-info">
+        <div className="lists-container">
+          {displayLists(list)}
+
+            { displayListComposer ?
+
+            <div className="list-composer composer">
+              <form onSubmit={ createList } ref={wrapperRef}>
+                <div>
+                  <input
+                     type="text"
+                     className="input is-size-7"
+                     id="listTitle"
+                     placeholder="Enter list title ..."
+                     onChange={onChange}
+                  />
+                </div>
+                <div>
+                  <button className="button is-success is-size-7 card-composer-submit-btn" type="submit">
+                    
+                  Add List
+                  </button>
+                </div>
+              </form>
+            </div>
+            :
+            <div className="open-composer-btn-container">
+              <a className="open-composer-btn list-composer-btn" onClick={() => setDisplayListComposer(true)}>
+                <span className="btn-icon">
+                  <FontAwesomeIcon icon={faPlus} />
+                </span>
+                Add another list
+                </a>
+            </div>
+            }
+          </div>
+      </div>
+    </>
   )
 }
 

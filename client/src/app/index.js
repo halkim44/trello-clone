@@ -6,7 +6,7 @@ import {setAuthToken} from "../utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "../actions/authActions";
 
 import store from '../store';
-import { Landing } from '../components/layout/Landing';
+import Landing from '../components/layout/Landing';
 import Register from '../components/auth/Register';
 import Login from '../components/auth/Login';
 import PrivateRoute from '../components/private-route/PrivateRoute';
@@ -30,7 +30,6 @@ if (localStorage.jwtToken) {
 const App = props => {
   return (
     <div className="App">
-      <Link to="/"><h1>Mello</h1></Link>
       <Route exact path="/" component={Landing} />
       <Route exact path="/register" component={Register} />
       <Route exact path="/login" component={Login} />
@@ -40,6 +39,7 @@ const App = props => {
       
       <Switch>
         <PrivateRoute exact path={`/${store.getState().auth.userFullName}/boards`} component={ Home } />
+        <PrivateRoute exact path="/home" component={ Home } />
 
       </Switch>
     </div>

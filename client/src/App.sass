@@ -1,0 +1,218 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Damion&display=swap')
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;1,200;1,300;1,400;1,600&display=swap')
+
+$button-hover-color: transparent
+
+@import '../node_modules/bulma/sass/utilities/_all'
+@import '../node_modules/bulma/sass/base/_all'
+@import '../node_modules/bulma/sass/layout/hero'
+@import '../node_modules/bulma/sass/grid/tiles'
+@import '../node_modules/bulma/sass/elements/container'
+@import '../node_modules/bulma/sass/helpers/_all'
+@import '../node_modules/bulma/sass/components/level'
+@import '../node_modules/bulma/sass/components/menu'
+@import '../node_modules/bulma/sass/components/modal'
+@import '../node_modules/bulma/sass/elements/button'
+@import '../node_modules/bulma/sass/form/_all'
+@import '../node_modules/bulma/sass/grid/columns'
+
+
+
+*
+  font-family: 'Noto Sans SC', sans-serif
+html,
+body,
+#root,
+.App
+  height: 100%
+html
+  overflow: hidden
+.app
+  position: relative
+
+.logo
+  font-family: 'Damion', cursive
+  line-height: 1em
+a 
+  font-weight: 200
+#top-bar
+  padding: 16px
+
+
+.hero
+  h1
+    line-height: 1.4em
+  .subtitle
+    margin-bottom: 3.8em
+    font-family: 'Source Sans Pro',sans-serif
+    font-weight: 200;
+
+
+.auth-page-wrapper
+  background-color: #F9FAFC
+  height: 100vh
+
+.form-wrapper
+  max-width: 420px
+  padding: 25px 40px
+  box-shadow: rgba(0,0,0,0.1) 0 0 10px
+  h2
+    padding-bottom: 25px
+  & > div:last-child
+    padding-bottom: 25px
+
+.auth-page-logo-wrapper
+  padding: 2em 0
+
+#top-bar.user-tools-active
+  padding-top: 0
+  padding-bottom: 0
+
+.margin-t-50
+  margin-top: 50px
+
+.board-tile
+  height: 96px
+  border-radius: 4px
+  padding: 6px 12px
+
+.padding-lr-120
+  padding: 0 100px
+
+.add-board-btn
+  height: 96px
+
+.board-list-title
+  line-height: 2.6em
+
+#addBoardModal
+  justify-content: initial
+  .add-board-form-wrapper
+    width: 404px
+    margin: 38px auto 0
+
+.add-board-form-wrapper--input-wrapper
+  height: 96px
+  padding: 12px
+  border-radius: 4px
+  margin-bottom: 8px
+
+.board-title-wrapper.level
+  padding: 12px 26px
+  margin: 0
+
+.board-title
+  font-weight: 600
+
+.workspace
+  display: flex
+  position: absolute
+  top: 86px
+  bottom: 0
+  left: 0
+  right: 0
+
+  .lists-container
+    flex: 1
+    display: flex
+    margin: 0 4px
+    overflow-y: hidden
+    overflow-x: auto
+    height: 100%
+.scroll-wrapper
+  height: 100%
+
+.list-wrapper
+  max-height: 100%
+  width: 272px
+  padding: 6px
+  margin: 0 4px
+  display: flex
+  flex-direction: column
+  border-radius: 6px
+  background-color: #ebecf0
+  height: auto
+
+.cards-container
+  height: 100%
+  overflow-x: auto
+  .card
+    cursor: grab
+    background-color: #fff
+    overflow: hidden
+    border-radius: 6px
+    box-shadow: 0 1px 0 rgba(9,30,66,.25);
+    margin-bottom: 6px
+    padding: 6px 8px 4px
+    font-size: .9em
+    font-weight: 400
+    color: #222
+    &:hover
+      background-color: #f4f5f7
+
+.title-menu-wrapper
+  margin: -6px -6px 0
+  h3
+    font-weight: 700
+    line-height: 2.4em
+    padding: 0 16px
+.composer
+  textarea
+    background-color: #fff
+    border: 0
+    border-radius: 6px
+    box-shadow: 0 1px 0 rgba(9,30,66,.25);
+    margin-bottom: 2px
+    padding: 6px 8px 24px
+    font-size: .9em
+    font-weight: 400
+    width: 100%
+    resize: none
+    &:focus
+      outline: none
+
+.open-composer-btn
+  background: transparent
+  display: flex
+  width: 100%
+  color: #666
+  padding: 4px 12px
+  font-size: .86em
+  font-weight: 400
+  &:hover
+    background-color: rgba(9,30,66,.08)
+    color: #172b4d
+
+  &.list-composer-btn
+    padding-top: 12px
+    padding-bottom: 12px
+    border-radius: 6px
+    color: #fff
+    background-color: hsla(0,0%,100%,.24);
+    &:hover
+      background-color: hsla(0,0%,100%,.32)
+  
+.card-composer
+  .open-composer-btn
+    border-radius: 4px
+
+
+.list-composer
+  width: 272px
+  padding: 6px
+  border-radius: 6px
+  background-color: #ebecf0
+  height: fit-content
+  form > div:first-child
+    margin-bottom: 6px
+.open-composer-btn-container
+  width: 272px
+.btn-icon
+  font-size: 1.1em
+  margin: 0 8px
++tablet
+  .hero-body
+    > .container
+      h1, p
+        max-width: 35%

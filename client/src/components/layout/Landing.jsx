@@ -1,16 +1,52 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import { Navbar } from './Navbar';
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
+const Landing = ({auth}) => {
+  
+  return(
+    <>
+    { auth.isAuthenticated ?
+      <Redirect to={`/${auth.userFullName}/boards`} />
+      :
+      <div>
+        <Navbar />
+        <section className="hero is-info is-fullheight">
+          <div className="hero-body  has-text-center-mobile">
+            <div className="container">
+              <h1 className="title is-size-2">
+                Mello lets you work more
+                collaboratively and get more done.
+              </h1>
+              <p className="subtitle is-size-4">
+                Trello’s boards, lists, and cards enable
+                you to organize and prioritize your projects
+                in a fun, flexible, and rewarding way.
+              </p>
+              <Link to='/register'>
+                <button className="button is-success is-size-5">
+                  Sign Up ― It's Free!
+                </button>
+              </Link>
+              </div>
+          </div>
+        </section>
+      </div>
+    }
+    </>
+  )
+}
 
-export const Landing = () => (
-  <div>
-    <h1>Hello, Welcome!</h1>
-      <Link to="/login">
-        Login
-      </Link>
-      <Link to="/register">
-        Register
-      </Link>
+Landing.propTypes = {
+  auth: PropTypes.object.isRequired,
+}
 
-  </div>
-)
+const mapStateToProps = state => ({
+  auth: state.auth
+})
+
+export default connect(
+  mapStateToProps
+)(Landing);

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { registerUser } from "../../actions/authActions";
-import classnames from "classnames";
+import { Logo } from "../layout/Logo";
+import isEmpty from "is-empty";
 
 const Register = props => {
   const [userData, setuserData] = useState({
@@ -14,8 +15,10 @@ const Register = props => {
   })
 
   useEffect(() => {
-    setuserData(Object.assign(userData, {errors: props.errors}))
-  }, [userData, props.errors])
+    if(props.errors.signupx) {
+      setuserData(Object.assign({}, userData, {errors: props.errors}))
+    }
+  }, [props])
 
   const onChange = e => {
     const newObj = Object.assign({}, userData);
@@ -34,68 +37,73 @@ const Register = props => {
   };
 
   const { errors } = userData;
+  
   return (
-        <div>
-          <h1>Register</h1>
-          <form onSubmit={onSubmit}>
-            <div>
-              <input
-                onChange={onChange}
-                value={userData.name}
-                error={errors.name}
-                id="fullName"
-                type="text"
-                className={classnames("", {
-                  invalid: errors.name
-                })}
-              />
-              <label htmlFor="fullName">Name</label>
-              <span className="red-text">{errors.name}</span>
+
+    <div className="auth-page-wrapper">
+      <div className="auth-page-logo-wrapper container has-text-centered">
+        <Logo isLink={false} color={'info'} />
+      </div>
+      <div className="container form-wrapper has-background-white">
+        <h2 className="has-text-centered is-size-6">Sign up for your account</h2>
+        <form onSubmit={onSubmit}>
+
+          {
+            !isEmpty(errors) && 
+            <div className="field has-background-danger-light">
+              <span>{errors.signup}</span>
             </div>
-            <div>
+          }
+        
+          <div class="field">
+            <div className="control">
               <input
+                className="input"
+                type="email"
+                id="email"
+                placeholder="Enter email address" 
                 onChange={onChange}
                 value={userData.email}
-                error={errors.email}
-                id="email"
-                type="email"
-                className={classnames("", {
-                  invalid: errors.email
-                })}
               />
-              <label htmlFor="email">Email</label>
-              <span className="red-text">{errors.email}</span>
             </div>
-            <div>
+          </div>
+    
+          <div class="field">
+            <div className="control">
               <input
+                className="input"
+                type="text"
+                id="fullName"
+                placeholder="Enter full name" 
+                onChange={onChange}
+                value={userData.fullName}
+              />
+            </div>
+          </div>
+          <div className="field">
+            <div className="control">
+              <input
+                className="input"
+                type="password"
+                id="password"
+                placeholder="Create password"
                 onChange={onChange}
                 value={userData.password}
-                error={errors.password}
-                id="password"
-                type="password"
-
-                className={classnames("", {
-                  invalid: errors.password
-                })}
               />
-              <label htmlFor="password">Password</label>
-              <span className="red-text">{errors.password}</span>
             </div>
-            <div>
-              <button
-                style={{
-                  width: "150px",
-                  borderRadius: "3px",
-                  letterSpacing: "1.5px",
-                  marginTop: "1rem"
-                }}
-                type="submit"
-              >
-                Sign up
-              </button>
-            </div>
-          </form>
+          </div>
+          <div>
+            <button class="button is-fullwidth is-success">Sign up</button>
+          </div>
+        </form>
+        <hr />
+        <div className="has-text-centered">
+          <Link to='/login' className='has-text-info'>
+          Already have an account? Log in
+          </Link>
         </div>
+      </div>
+    </div>
   )
 }
 

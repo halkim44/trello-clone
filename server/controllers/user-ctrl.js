@@ -17,7 +17,7 @@ const createUser = (req, res) => {
   }
   User.findOne({ email: req.body.email }).then(user => {
     if (user) {
-      return res.status(400).json({ email: "Email already exists" });
+      return res.status(400).json({ signup: "Email already exists" });
     } else {
       const newUser = new User({
         full_name: req.body.full_name,
@@ -54,7 +54,7 @@ const loginUser = (req, res) => {
 
   User.findOne({ email }).then(user => {
     if (!user) {
-      return res.status(404).json({ emailnotfound: "Email not found" });
+      return res.status(404).json({ login: "Email not found" });
     }
 
     bcrypt.compare(password, user.password).then(isMatch => {
@@ -81,7 +81,7 @@ const loginUser = (req, res) => {
       } else {
         return res
           .status(400)
-          .json({ passwordincorrect: "Password incorrect" })
+          .json({ login: "Password incorrect" })
       }
     });
   });

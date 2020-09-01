@@ -7,7 +7,7 @@ const db = require('./db')
 const router = require('./routes/index')
 
 const app = express()
-const apiPort = 3000
+const PORT = process.env.PORT || 5000
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cors())
@@ -24,4 +24,4 @@ app.get('/', (req, res) => {
 // FOR TESTING
 app.use('/api', router)
 
-app.listen(apiPort, () => console.log(`Server running on port ${apiPort}`))
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`))

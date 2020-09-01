@@ -55,7 +55,7 @@ const Register = props => {
             </div>
           }
         
-          <div class="field">
+          <div className="field">
             <div className="control">
               <input
                 className="input"
@@ -68,7 +68,7 @@ const Register = props => {
             </div>
           </div>
     
-          <div class="field">
+          <div className="field">
             <div className="control">
               <input
                 className="input"
@@ -93,7 +93,7 @@ const Register = props => {
             </div>
           </div>
           <div>
-            <button class="button is-fullwidth is-success">Sign up</button>
+            <button className="button is-fullwidth is-success">Sign up</button>
           </div>
         </form>
         <hr />

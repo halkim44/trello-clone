@@ -89,10 +89,10 @@ const getBoardsByUserId = async (req, res) => {
     }).catch(err => console.log(err))
 }
 
-const addCardGroupToBoard = (id, cardGroupId) => {
+const addCardGroupToBoard = (id, boardId) => {
   Board.findById({_id: id}, function (err, board) {
     if (err) {console.log(err)}
-    board.card_groups.push(cardGroupId);
+    board.card_groups.push(boardId);
     board.save();
   }).catch(err => console.log(err));
 }
@@ -104,7 +104,25 @@ const addCardToBoard = (id, cardId) => {
     board.save();
   }).catch(err => console.log(err));
 }
+const updateCardGroupOrder = async (req, res) => {
 
+  const body = req.body
+
+  if(!body) {
+    return res.status(400).json({
+      success: false,
+      error: 'You must provide the card_group array and board Id',
+    })
+  }
+
+  await Board.findById({_id: body.boardId}, function (err, board) {
+    if (err) {console.log(err)}
+
+    board.card_groups = body.newCardGroupOrder;
+    board.save();
+    return res.status(200).json({ success: true, data: board })
+  }).catch(err => console.log(err));
+}
 module.exports = {
   createBoard,
   deleteBoard,
@@ -112,4 +130,5 @@ module.exports = {
   getBoardsByUserId,
   addCardGroupToBoard,
   addCardToBoard,
+  updateCardGroupOrder,
 }

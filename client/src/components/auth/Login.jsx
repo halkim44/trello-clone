@@ -63,14 +63,14 @@ const Login = props => {
             </div>
           }
 
-          <div class="field">
-            <div class="control">
+          <div className="field">
+            <div className="control">
               <input
                 className="input"
                 type="email"
                 id="email"
                 value={userLoginForm.email}
-                placeholder="Enter email" 
+                placeholder="Enter email"
                 onChange={onChange}
               />
             </div>
@@ -86,7 +86,7 @@ const Login = props => {
             />
           </div>
           <div>
-            <button class="button is-fullwidth is-success">Log in</button>
+            <button className="button is-fullwidth is-success">Log in</button>
           </div>
         </form>
         <hr />

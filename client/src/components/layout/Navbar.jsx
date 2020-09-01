@@ -14,9 +14,12 @@ export const Navbar = () => {
         {auth.isAuthenticated ?
           <>
             <div className="level-left">
-              <span className="has-text-info-light">
-                Search
-              </span>
+              
+              <Link to="/">
+                <span className="has-text-info-light">
+                  Home
+                </span>
+              </Link>
             </div>
             <div className="center"><Logo isLink={true} color='info-light' size='3'/></div>
             <div className="right has-text-info-light">

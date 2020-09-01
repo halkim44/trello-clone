@@ -8,6 +8,7 @@ export const AddCard = ({ boardId, listId, addCardToState }) => {
 
   const [content, setContent] = useState('');
   const [isComposerOpen, setIsComposerOpen] = useState(false)
+  const [data, setData] = useState(null)
   
   const createCard = e => {
     e.preventDefault();
@@ -20,7 +21,7 @@ export const AddCard = ({ boardId, listId, addCardToState }) => {
     api
       .post('/card', newCard)
       .then(res => {
-        addCardToState(res.data.card);
+        setData(res.data.card)
         form.reset();
         setContent('')
         setIsComposerOpen(false)
@@ -40,6 +41,10 @@ export const AddCard = ({ boardId, listId, addCardToState }) => {
       }
       document.addEventListener("mousedown", handleClickOutside);
     }
+    if(data !== null) {
+      console.log(data);
+      addCardToState(data);
+    }
   }, [isComposerOpen]);
 
   return (
@@ -52,6 +57,7 @@ export const AddCard = ({ boardId, listId, addCardToState }) => {
               id="content"
               onChange={ e => setContent(e.target.value) }
               value={content}
+              autoFocus
               >
 
             </textarea>

@@ -1,5 +1,6 @@
 const Card = require('../models/Card');
 const BoardControl = require('./board-ctrl');
+const {addCardOrder} = require('./cardGroup-ctrl');
 
 const createCard = (req, res) => {
   const body = req.body
@@ -18,6 +19,7 @@ const createCard = (req, res) => {
     .save()
     .then(() => {
       BoardControl.addCardToBoard(card.board, card._id);
+      addCardOrder(card.card_group, card._id);
       return res.status(201).json({
         success: true,
         card,

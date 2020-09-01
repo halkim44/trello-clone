@@ -1,5 +1,6 @@
 const CardGroup = require('../models/CardGroup');
 const BoardControl = require('./board-ctrl');
+
 const createCardGroup = (req, res) => {
   const body = req.body
 
@@ -117,11 +118,43 @@ const getCardGroups = async (req, res) => {
   }).catch(err => console.log(err))
 }
 
+const addCardOrder = (id, cardId) => {
+  CardGroup.findById({_id: id}, function (err, cardGroup) {
+    if (err) {console.log(err)}
+
+    cardGroup.card_order.push(cardId);
+    cardGroup.save();
+  }).catch(err => console.log(err));
+}
+
+const updateCardOrder = async (req, res) => {
+
+  const body = req.body
+
+  if(!body) {
+    return res.status(400).json({
+      success: false,
+      error: 'You must provide a the card_order array and list Id',
+    })
+  }
+
+  await CardGroup.findById({_id: body.listId}, function (err, cardGroup) {
+    if (err) {console.log(err)}
+
+    cardGroup.card_order = body.newCardOrder;
+    cardGroup.save();
+    return res.status(200).json({ success: true, data: cardGroup })
+  }).catch(err => console.log(err));
+}
+
+
+
 module.exports = {
   createCardGroup,
   updateCardGroup,
   deleteCardGroup,
   getCardGroups,
   getCardGroupById,
-
+  updateCardOrder,
+  addCardOrder
 }

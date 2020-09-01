@@ -33,7 +33,7 @@ export const BoardList = props => {
         {listComponents}
         <li className="column is-one-quarter">
           <div className="">
-            <button class="button board-tile is-light is-fullwidth" onClick={ toggleModal }>Create new Board</button>
+            <button className="button board-tile is-light is-fullwidth" onClick={ toggleModal }>Create new Board</button>
           </div>
         </li>
       </ul>

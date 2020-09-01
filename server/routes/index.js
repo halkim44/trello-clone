@@ -11,6 +11,7 @@ const UserCtrl = require('../controllers/user-ctrl');
 router.post('/board', BoardCtrl.createBoard)
 router.delete('/board/:id', BoardCtrl.deleteBoard)
 router.get('/board/:id', BoardCtrl.getBoardById)
+router.post('/board/card-group-order', BoardCtrl.updateCardGroupOrder)
 
 router.post('/card', CardCtrl.createCard)
 router.put('/card/:id', CardCtrl.updateCard)
@@ -19,6 +20,7 @@ router.get('/card/:id', CardCtrl.getCardById)
 router.get('/cards', CardCtrl.getCards)
 
 router.post('/card-group', CardGroupCtrl.createCardGroup)
+router.post('/card-group/card-order', CardGroupCtrl.updateCardOrder)
 router.put('/card-group/:id', CardGroupCtrl.updateCardGroup)
 router.delete('/card-group/:id', CardGroupCtrl.deleteCardGroup)
 router.get('/card-group/:id', CardGroupCtrl.getCardGroupById)

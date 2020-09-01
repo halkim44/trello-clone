@@ -30,9 +30,9 @@ export const AddBoard = ({ user, addBoardToState, isActive }) => {
   }
   return (
     <>
-      <div class='modal' id="addBoardModal">
-        <div class="modal-background" onClick={  toggleModal }></div>
-        <div class="modal-content">
+      <div className='modal' id="addBoardModal">
+        <div className="modal-background" onClick={  toggleModal }></div>
+        <div className="modal-content">
           <div className="add-board-form-wrapper">
             <form onSubmit={onSubmit}>
               <div className="add-board-form-wrapper--input-wrapper has-background-danger">

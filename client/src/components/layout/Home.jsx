@@ -7,7 +7,6 @@ import { AddBoard } from '../AddBoard';
 import { BoardList } from '../BoardList';
 import { Navbar } from './Navbar';
 import { Sidebar } from './Sidebar';
-import { toggleModal } from '../../helper';
 
 
 const Home = props => {

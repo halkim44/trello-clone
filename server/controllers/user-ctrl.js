@@ -67,7 +67,7 @@ const loginUser = (req, res) => {
 
         jwt.sign(
           payload,
-          keys.secretOrKey,
+          process.env.secretOrKey,
           {
             expiresIn: 31556926
           },

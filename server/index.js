@@ -7,7 +7,7 @@ const db = require('./db')
 const router = require('./routes/index')
 
 const app = express()
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || 3000
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cors())
@@ -17,8 +17,8 @@ db
   .once('open', () => console.log('connected to mongodb'))
   .on('error', console.error.bind(console, 'MongoDB connection error:'))
 
-app.get('/', (req, res) => {
-    res.send('Hello World!')
+app.get('/', function (req, res) {
+    res.send('Hello World!');
 })
 
 // FOR TESTING

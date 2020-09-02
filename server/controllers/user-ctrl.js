@@ -4,7 +4,6 @@ const jwt = require("jsonwebtoken");
 
 const validateRegisterInput = require('../validation/register');
 const validateLoginInput = require('../validation/login');
-const keys = require('../../config/keys');
 
 
 const createUser = (req, res) => {

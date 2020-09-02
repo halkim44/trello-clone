@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import { connect } from "react-redux";
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
@@ -24,7 +24,6 @@ export const Board = props =>{
   const boardId = props.location.pathname.split("/")[2];
   const state = store.getState();
   const wrapperRef = useRef(null);
-  let newCard = null;
 
   const updateCard = newCard => {
     const newLists = [...lists];
@@ -34,35 +33,30 @@ export const Board = props =>{
     setLists(newLists);
   }
 
-  useEffect(() => {
-
-    console.log('board updated');
-
-    if (isEmpty(board)) {
-      (id => {
-        api
-          .get(`/board/${id}`)
-          .then(res => {
-            const boardObj = res.data.data;
-            // check if some of the users of the board match the current user
-            if (boardObj.users.some( user => user.userId === state.auth.user.id)) {
-              setBoard({
-                title: boardObj.title,
-                labels: boardObj.available_Label,
-                isClosed: boardObj.is_closed,                
-              })
-              setLists(boardObj.card_groups);
-              const cardObj = {}
-              boardObj.cards.forEach(card => cardObj[card._id] = card)
-              setCards(cardObj);
-            }
-          })
-          .catch(err => {
-            console.log(err);
-          })
-      })(boardId)
-    }
-  }, [])
+  if (isEmpty(board)) {
+    (id => {
+      api
+        .get(`/board/${id}`)
+        .then(res => {
+          const boardObj = res.data.data;
+          // check if some of the users of the board match the current user
+          if (boardObj.users.some( user => user.userId === state.auth.user.id)) {
+            setBoard({
+              title: boardObj.title,
+              labels: boardObj.available_Label,
+              isClosed: boardObj.is_closed,                
+            })
+            setLists(boardObj.card_groups);
+            const cardObj = {}
+            boardObj.cards.forEach(card => cardObj[card._id] = card)
+            setCards(cardObj);
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        })
+    })(boardId)
+  }
 
   // ** list Composer toggle Start
   if(displayListComposer) {
@@ -85,7 +79,7 @@ export const Board = props =>{
       }
       index={index}
     >
-      <AddCard boardId={ boardId } listId={ listsData._id } addCardToState={updateCard}/>
+      <AddCard boardId={ boardId } listId={ listsData._id } addCardToState={useCallback( updateCard, [])}/>
     </List>
   }
 
@@ -97,12 +91,15 @@ export const Board = props =>{
       board: boardId
     }
     const form = e.target;
+    form.reset();
+    setDisplayListComposer(false)
+    
     api
-      .post('/card-group', newList)
-      .then(res => {
-        setLists([...lists, res.data.card_group])
-        form.reset();
-      })
+    .post('/card-group', newList)
+    .then(res => {
+      setLists([...lists, res.data.card_group])
+      console.log('list added to database');
+    });
   }
 
   const onChange = e => {
@@ -128,7 +125,6 @@ export const Board = props =>{
       const listArray = Array.from(lists);
       const [droppedListObject] =  listArray.splice(source.index, 1);
       listArray.splice(destination.index, 0, droppedListObject);
-      const listOrder = listArray.map(list => list._id);
 
       setLists(listArray);
 
@@ -171,7 +167,6 @@ export const Board = props =>{
   return (
     <>
       <Navbar />
-      {console.log(cards)}
       <div className="board-title-wrapper level is-size-5 has-background-info">
         <div className="level-left">
           <div className="level-item">
@@ -226,12 +221,12 @@ export const Board = props =>{
                   </div>
                   :
                   <div className="open-composer-btn-container">
-                    <a className="open-composer-btn list-composer-btn" onClick={() => setDisplayListComposer(true)}>
+                    <btn className="open-composer-btn list-composer-btn" onClick={() => setDisplayListComposer(true)}>
                       <span className="btn-icon">
                         <FontAwesomeIcon icon={faPlus} />
                       </span>
                       Add another list
-                      </a>
+                      </btn>
                   </div>
                 }
               </div>

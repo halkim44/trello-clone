@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-import { api } from '../api';
-import { Link, Route } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import { toggleModal } from '../helper';
 
 export const BoardList = props => {

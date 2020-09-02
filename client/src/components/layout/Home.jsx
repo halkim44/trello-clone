@@ -16,13 +16,14 @@ const Home = props => {
     props.logoutUser();
   }
   const [boards, setBoards] = useState([]);
-  const [addBoardIsOpen, setaddBoardIsOpen] = useState(false)  
   useEffect(() => {
-    if(boards.length === 0) {
+    if(props.boards.boards.length === 0) {
       props.getBoardList(props.auth.user.id);
+    } else {
+      setBoards([...props.boards.boards])
     }
-    setBoards([...props.boards.boards]);
-  }, [props.boards.boards])
+    console.log(props);
+  }, [props])
 
   return (
     <>
@@ -32,9 +33,6 @@ const Home = props => {
           <div className="column is-3">
             <Sidebar onLogoutClick={ onLogoutClick }/>
           </div>
-          {/*
-          <BoardList boards={boards}/>
-          */}
           <div className="column is-9">
             <BoardList boards={boards}/>
           </div>

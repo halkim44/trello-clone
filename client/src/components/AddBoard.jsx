@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import { api, socket } from '../api';
-import store from '../store';
+import { api } from '../api';
 import { toggleModal } from '../helper';
 
-export const AddBoard = ({ user, addBoardToState, isActive }) => {
-  console.log(store.getState())
+export const AddBoard = ({ user, addBoardToState }) => {
   const [boardTitle, setBoardTitle] = useState('')
 
   const onChange = e => {

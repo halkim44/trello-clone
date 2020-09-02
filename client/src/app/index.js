@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route, withRouter, Link} from 'react-router-dom';
+import { Switch, Route, withRouter} from 'react-router-dom';
 
 import jwt_decode from "jwt-decode";
 import {setAuthToken} from "../utils/setAuthToken";

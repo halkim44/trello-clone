@@ -1,7 +1,6 @@
 import React from 'react';
 import { Card } from './Card';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
-import { api } from '../../api';
 
 
 export const List = ({ data, cards, index, children }) => {

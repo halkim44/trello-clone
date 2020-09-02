@@ -17,18 +17,16 @@ const Login = props => {
 
   useEffect(() => {
     if (props.auth.isAuthenticated) {
-
+      
       props.history.push(`/${props.auth.userFullName}/boards`);
     }
-    if (props.errors.login) {
+    if (props.errors.login && isEmpty(userLoginForm.errors)) {
       console.log(props.errors);
-      const newObj = Object.assign({}, userLoginForm);
-      newObj.errors = props.errors;
-      setUserLoginForm(newObj);
+      setUserLoginForm({ ...userLoginForm , errors: props.errors }); 
 
     }
-
-  }, [props])
+    console.log('login updated');
+  }, [props, userLoginForm]);
 
   const onChange = e => {
     const newObj = Object.assign({}, userLoginForm);
@@ -38,7 +36,8 @@ const Login = props => {
 
   const onSubmit = e => {
     e.preventDefault();
-    setUserLoginForm({},)
+    console.log(userLoginForm);
+    setUserLoginForm({ ...userLoginForm, errors:""});
     const userData = {
       email: userLoginForm.email,
       password: userLoginForm.password

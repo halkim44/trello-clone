@@ -83,6 +83,9 @@ a
 .add-board-btn
   height: 96px
 
+.logout-btn
+  cursor: pointer
+  
 .board-list-title
   line-height: 2.6em
 
@@ -136,6 +139,7 @@ a
 .cards-container
   height: 100%
   overflow-x: auto
+  min-height: 6px
   .card
     cursor: grab
     background-color: #fff
@@ -178,10 +182,14 @@ a
   color: #666
   padding: 4px 12px
   font-size: .86em
-  font-weight: 400
+  font-weight: 400  
+  border: none  
+  line-height: 1.6rem
+
   &:hover
     background-color: rgba(9,30,66,.08)
     color: #172b4d
+  & > *
 
   &.list-composer-btn
     padding-top: 12px

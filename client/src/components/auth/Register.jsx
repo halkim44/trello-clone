@@ -11,12 +11,12 @@ const Register = props => {
     fullName: "",
     email: "",
     password: "",
-    errors: {}
   })
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
-    if(props.errors.signupx) {
-      setuserData(Object.assign({}, userData, {errors: props.errors}))
+    if(props.errors.signup) {
+      setErrors(props.errors);
     }
   }, [props])
 
@@ -36,7 +36,6 @@ const Register = props => {
     props.registerUser(newUser, props.history);
   };
 
-  const { errors } = userData;
   
   return (
 

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const serverUrl = 'http://localhost:3000';
+const serverUrl = 'https://immense-wave-33493.herokuapp.com';
 
 export const api = axios.create({
     baseURL: `${serverUrl}/api`,

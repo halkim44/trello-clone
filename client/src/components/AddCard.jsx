@@ -5,30 +5,31 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 export const AddCard = ({ boardId, listId, addCardToState }) => {
-
   const [content, setContent] = useState('');
   const [isComposerOpen, setIsComposerOpen] = useState(false)
-  const [data, setData] = useState(null)
   
   const createCard = e => {
     e.preventDefault();
+
     const newCard = {
       content,
       board: boardId,
       card_group: listId
     }
     const form = e.target;
+    setIsComposerOpen(false);
+    form.reset();
+    setContent('');
     api
-      .post('/card', newCard)
-      .then(res => {
-        setData(res.data.card)
-        form.reset();
-        setContent('')
-        setIsComposerOpen(false)
+    .post('/card', newCard)
+    .then(res => {
+      console.log('data added');
+        addCardToState(res.data.card);
       })
   }
   const wrapperRef = useRef(null);
   useEffect(() => {
+    console.log('update');
     if(isComposerOpen) {
 
       const textarea = document.querySelector('.card-composer textarea');
@@ -40,10 +41,6 @@ export const AddCard = ({ boardId, listId, addCardToState }) => {
           }
       }
       document.addEventListener("mousedown", handleClickOutside);
-    }
-    if(data !== null) {
-      console.log(data);
-      addCardToState(data);
     }
   }, [isComposerOpen]);
 
@@ -69,12 +66,12 @@ export const AddCard = ({ boardId, listId, addCardToState }) => {
           </div>
         </form>
         :
-        <a className="open-composer-btn" onClick={() => setIsComposerOpen(true)}>
+        <button className="open-composer-btn" onClick={() => setIsComposerOpen(true)}>
           <span className="btn-icon">
             <FontAwesomeIcon icon={faPlus} />
           </span>
-          Add another card
-        </a>
+          <span>Add another card</span>
+        </button>
       }
     </div>
   )

@@ -1,30 +1,27 @@
-import { api } from '../api';
-import { SET_BOARD_LIST, GET_ERRORS } from './types';
+import { serverAPI } from "../services/serverAPI";
+import { SET_BOARD_LIST, GET_ERRORS } from "./types";
 
-export const addBoard = boardData => dispatch => {
+export const addBoard = (boardData) => (dispatch) => {
+  serverAPI.post("/board", boardData).then((res) => {
+    console.log(res);
+  });
+};
 
-  api
-    .post('/board', boardData)
-    .then(res => {
-      console.log(res);
+export const getBoardList = (userId) => (dispatch) => {
+  serverAPI
+    .post("/user/boards", { userId: userId })
+    .then((res) => {
+      dispatch(setCurrentBoards(res.data.data));
     })
-}
-
-export const getBoardList = userId => dispatch => {
-  api
-    .post('/user/boards', { userId: userId })
-    .then(res => {
-      dispatch(setCurrentBoards(res.data.data))
-    })
-    .catch(err =>
+    .catch((err) =>
       dispatch({
         type: GET_ERRORS,
-        payload: err.response.data
+        payload: err.response.data,
       })
-    );  
-}
+    );
+};
 
-export const setCurrentBoards = boards => ({
+export const setCurrentBoards = (boards) => ({
   type: SET_BOARD_LIST,
-  payload: boards
-})
+  payload: boards,
+});

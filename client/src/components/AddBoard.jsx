@@ -1,35 +1,34 @@
-import React, { useState } from 'react';
-import { api } from '../api';
-import { toggleModal } from '../helper';
+import React, { useState } from "react";
+import { serverAPI } from "../services/serverAPI";
+import { toggleModal } from "../helper";
 
 export const AddBoard = ({ user, addBoardToState }) => {
-  const [boardTitle, setBoardTitle] = useState('')
+  const [boardTitle, setBoardTitle] = useState("");
 
-  const onChange = e => {
+  const onChange = (e) => {
     setBoardTitle(e.target.value);
   };
 
-  const onSubmit = e => {
+  const onSubmit = (e) => {
     e.preventDefault();
     const newBoard = {
       title: boardTitle,
-      userId: user.id
-    }
+      userId: user.id,
+    };
     const form = e.target;
-    api
-      .post('/board', newBoard)
-      
-      .then(res => {
-        addBoardToState( res.data.board );
+    serverAPI
+      .post("/board", newBoard)
+
+      .then((res) => {
+        addBoardToState(res.data.board);
         form.reset();
         toggleModal();
-      })
-
-  }
+      });
+  };
   return (
     <>
-      <div className='modal' id="addBoardModal">
-        <div className="modal-background" onClick={  toggleModal }></div>
+      <div className="modal" id="addBoardModal">
+        <div className="modal-background" onClick={toggleModal}></div>
         <div className="modal-content">
           <div className="add-board-form-wrapper">
             <form onSubmit={onSubmit}>
@@ -40,7 +39,7 @@ export const AddBoard = ({ user, addBoardToState }) => {
                   id="title"
                   placeholder="Add board title"
                   onChange={onChange}
-               />
+                />
               </div>
               <div>
                 <button type="submit" className="button is-success">
@@ -52,5 +51,5 @@ export const AddBoard = ({ user, addBoardToState }) => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};

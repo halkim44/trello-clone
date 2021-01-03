@@ -2,80 +2,78 @@ import React, { useState, useEffect } from "react";
 import { withRouter, Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { registerUser } from "../../actions/authActions";
-import { Logo } from "../layout/Logo";
+import { registerUser } from "../actions/authActions";
+import { Logo } from "../components/layout/Logo";
 import isEmpty from "is-empty";
 
-const Register = props => {
-  const [userData, setuserData] = useState({
+const Register = (props) => {
+  const [formData, setFormData] = useState({
     fullName: "",
     email: "",
     password: "",
-  })
+  });
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
-    if(props.errors.signup) {
+    if (props.errors.signup) {
       setErrors(props.errors);
     }
-  }, [props])
+  }, [props]);
 
-  const onChange = e => {
-    const newObj = Object.assign({}, userData);
-    newObj[e.target.id] = e.target.value
-    setuserData(newObj);
+  const onChange = (e) => {
+    const newObj = Object.assign({}, formData);
+    newObj[e.target.id] = e.target.value;
+    setFormData(newObj);
   };
 
-  const onSubmit = e => {
+  const onSubmit = (e) => {
     e.preventDefault();
     const newUser = {
-      "full_name": userData.fullName,
-      "email": userData.email,
-      "password": userData.password,
+      full_name: formData.fullName,
+      email: formData.email,
+      password: formData.password,
     };
     props.registerUser(newUser, props.history);
   };
 
-  
   return (
-
     <div className="auth-page-wrapper">
       <div className="auth-page-logo-wrapper container has-text-centered">
-        <Logo isLink={false} color={'info'} />
+        <Logo isLink={false} color={"info"} />
       </div>
       <div className="container form-wrapper has-background-white">
-        <h2 className="has-text-centered is-size-6">Sign up for your account</h2>
+        <h2 className="has-text-centered is-size-6">
+          Sign up for your account
+        </h2>
         <form onSubmit={onSubmit}>
-
-          {
-            !isEmpty(errors) && 
+          {!isEmpty(errors) && (
             <div className="field has-background-danger-light">
               <span>{errors.signup}</span>
             </div>
-          }
-        
+          )}
+
           <div className="field">
             <div className="control">
               <input
                 className="input"
                 type="email"
                 id="email"
-                placeholder="Enter email address" 
+                placeholder="Enter email address"
                 onChange={onChange}
-                value={userData.email}
+                value={formData.email}
               />
             </div>
           </div>
-    
+
           <div className="field">
             <div className="control">
               <input
                 className="input"
                 type="text"
                 id="fullName"
-                placeholder="Enter full name" 
+                placeholder="Enter full name"
                 onChange={onChange}
-                value={userData.fullName}
+                value={formData.fullName}
               />
             </div>
           </div>
@@ -87,7 +85,7 @@ const Register = props => {
                 id="password"
                 placeholder="Create password"
                 onChange={onChange}
-                value={userData.password}
+                value={formData.password}
               />
             </div>
           </div>
@@ -97,27 +95,24 @@ const Register = props => {
         </form>
         <hr />
         <div className="has-text-centered">
-          <Link to='/login' className='has-text-info'>
-          Already have an account? Log in
+          <Link to="/login" className="has-text-info">
+            Already have an account? Log in
           </Link>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 Register.propTypes = {
   registerUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired
-}
+  errors: PropTypes.object.isRequired,
+};
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   auth: state.auth,
-  errors: state.errors
-})
+  errors: state.errors,
+});
 
-export default connect(
-  mapStateToProps,
-  { registerUser }
-)(withRouter(Register))
+export default connect(mapStateToProps, { registerUser })(withRouter(Register));

@@ -1,66 +1,58 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { loginUser } from "../../actions/authActions";
-import { Logo } from '../layout/Logo';
-import { Link } from 'react-router-dom';
-import isEmpty from 'is-empty';
+import { loginUser } from "../actions/authActions";
+import { Logo } from "../components/layout/Logo";
+import { Link } from "react-router-dom";
+import isEmpty from "is-empty";
 
-const Login = props => {
-
+const Login = ({ auth, history, errors, loginUser }) => {
   const [userLoginForm, setUserLoginForm] = useState({
     email: "",
     password: "",
-    errors: {}
-  })
+    errors: {},
+  });
 
   useEffect(() => {
-    if (props.auth.isAuthenticated) {
-      
-      props.history.push(`/${props.auth.userFullName}/boards`);
+    if (auth.isAuthenticated) {
+      history.push(`/${auth.userFullName}/boards`);
     }
-    if (props.errors.login && isEmpty(userLoginForm.errors)) {
-      console.log(props.errors);
-      setUserLoginForm({ ...userLoginForm , errors: props.errors }); 
-
+    if (errors.login && isEmpty(userLoginForm.errors)) {
+      console.log(errors);
+      setUserLoginForm({ ...userLoginForm, errors: errors });
     }
-    console.log('login updated');
-  }, [props, userLoginForm]);
+  }, [auth, errors]);
 
-  const onChange = e => {
+  const onChange = (e) => {
     const newObj = Object.assign({}, userLoginForm);
     newObj[e.target.id] = e.target.value;
-    setUserLoginForm(newObj)
-  }
+    setUserLoginForm(newObj);
+  };
 
-  const onSubmit = e => {
+  const onSubmit = (e) => {
     e.preventDefault();
-    console.log(userLoginForm);
-    setUserLoginForm({ ...userLoginForm, errors:""});
+    setUserLoginForm({ ...userLoginForm });
     const userData = {
       email: userLoginForm.email,
-      password: userLoginForm.password
-    }
-    props.loginUser(userData);
-  }
-  
-  const {errors} = userLoginForm;
+      password: userLoginForm.password,
+    };
+    loginUser(userData);
+  };
+
   return (
     <div className="auth-page-wrapper">
       <div className="auth-page-logo-wrapper container has-text-centered">
-        <Logo isLink={false} color={'info'} />
+        <Logo isLink={false} color={"info"} />
       </div>
       <div className="container form-wrapper has-background-white">
         <h2 className="has-text-centered is-size-6">Log in to Mello</h2>
         <form onSubmit={onSubmit}>
-    
-          {
-            !isEmpty(errors) && 
+          {!isEmpty(userLoginForm.errors) && (
             <div className="field has-background-danger-light">
-              <span>{errors.login}</span>
+              <span>{userLoginForm.errors.login}</span>
             </div>
-          }
+          )}
 
           <div className="field">
             <div className="control">
@@ -85,32 +77,31 @@ const Login = props => {
             />
           </div>
           <div>
-            <button className="button is-fullwidth is-success">Log in</button>
+            <button className="button is-fullwidth is-success" type="submit">
+              Log in
+            </button>
           </div>
         </form>
         <hr />
         <div className="has-text-centered">
-          <Link to='/register' className='has-text-info'>
+          <Link to="/register" className="has-text-info">
             Sign up for an account
           </Link>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 Login.propTypes = {
   loginUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired
+  errors: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   auth: state.auth,
-  errors: state.errors
+  errors: state.errors,
 });
 
-export default connect(
-  mapStateToProps,
-  { loginUser }
-)(Login);
+export default connect(mapStateToProps, { loginUser })(Login);

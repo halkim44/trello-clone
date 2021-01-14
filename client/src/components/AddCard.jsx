@@ -1,42 +1,35 @@
 import React, { useState, useRef, useEffect } from "react";
-import { serverAPI } from "../services/serverAPI";
 import fitTextarea from "fit-textarea";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { createNewCard } from "../services/api/card";
 
 export const AddCard = ({ boardId, listId, addCardToState }) => {
   const [content, setContent] = useState("");
   const [isComposerOpen, setIsComposerOpen] = useState(false);
 
+  function handleClickOutside(event) {
+    if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+      setIsComposerOpen(false);
+    }
+  }
   const createCard = (e) => {
     e.preventDefault();
 
-    const newCard = {
-      content,
-      board: boardId,
-      card_group: listId,
-    };
     const form = e.target;
     setIsComposerOpen(false);
     form.reset();
     setContent("");
-    serverAPI.post("/card", newCard).then((res) => {
+    createNewCard(content, boardId, listId).then((res) => {
       console.log("data added");
       addCardToState(res.data.card);
     });
   };
   const wrapperRef = useRef(null);
   useEffect(() => {
-    console.log("update");
     if (isComposerOpen) {
       const textarea = document.querySelector(".card-composer textarea");
       fitTextarea.watch(textarea);
-
-      function handleClickOutside(event) {
-        if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
-          setIsComposerOpen(false);
-        }
-      }
       document.addEventListener("mousedown", handleClickOutside);
     }
   }, [isComposerOpen]);
@@ -52,6 +45,7 @@ export const AddCard = ({ boardId, listId, addCardToState }) => {
               onChange={(e) => setContent(e.target.value)}
               value={content}
               autoFocus
+              placeholder="Enter a title for this card..."
             ></textarea>
           </div>
           <div>

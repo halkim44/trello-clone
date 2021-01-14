@@ -15,6 +15,9 @@ const Register = (props) => {
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
+    if (props.auth.isAuthenticated) {
+      props.history.push(`/${props.auth.userFullName}/boards`);
+    }
     if (props.errors.signup) {
       setErrors(props.errors);
     }

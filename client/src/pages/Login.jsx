@@ -19,7 +19,6 @@ const Login = ({ auth, history, errors, loginUser }) => {
       history.push(`/${auth.userFullName}/boards`);
     }
     if (errors.login && isEmpty(userLoginForm.errors)) {
-      console.log(errors);
       setUserLoginForm({ ...userLoginForm, errors: errors });
     }
   }, [auth, errors]);

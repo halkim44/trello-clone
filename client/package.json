@@ -13,15 +13,19 @@
     "axios": "^0.21.0",
     "bulma": "^0.9.0",
     "classnames": "^2.2.6",
+    "eslint": "^7.17.0",
+    "eslint-plugin-react": "^7.22.0",
     "fit-textarea": "^2.0.0",
     "is-empty": "^1.2.0",
     "jwt-decode": "^2.2.0",
     "react": "^16.13.1",
     "react-beautiful-dnd": "^13.0.0",
     "react-dom": "^16.13.1",
+    "react-icons": "^4.1.0",
     "react-redux": "^7.2.1",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^3.4.3",
+    "react-scripts": "4.0.0",
+    "react-textarea-autosize": "^8.3.0",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0"
   },
@@ -29,12 +33,10 @@
     "start": "PORT=8000 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:coverage": "react-scripts test --coverage --watchAll=false",
     "eject": "react-scripts eject"
   },
   "proxy": "http://localhost:3000",
-  "eslintConfig": {
-    "extends": "react-app"
-  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -48,7 +50,31 @@
     ]
   },
   "devDependencies": {
-    "eslint-plugin-import": "^2.22.1",
-    "node-sass": "^4.14.1"
-  }
+    "istanbul-badges-readme": "^1.2.0",
+    "node-sass": "^4.14.1",
+    "react-refresh": "^0.9.0",
+    "remotedev-server": "^0.3.1"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 70,
+        "functions": 70,
+        "lines": 70,
+        "statements": 70
+      }
+    },
+    "coverageReporters": [
+      "html",
+      "text",
+      "json-summary"
+    ]
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ]
 }

@@ -12,7 +12,6 @@ $button-hover-color: transparent
 @import '../node_modules/bulma/sass/helpers/_all'
 @import '../node_modules/bulma/sass/components/level'
 @import '../node_modules/bulma/sass/components/menu'
-@import '../node_modules/bulma/sass/components/modal'
 @import '../node_modules/bulma/sass/elements/button'
 @import '../node_modules/bulma/sass/form/_all'
 @import '../node_modules/bulma/sass/grid/columns'
@@ -38,7 +37,12 @@ a
   font-weight: 200
 #top-bar
   padding: 16px
-
+  button
+    height: 32px
+button
+  background-color: transparent
+  border: none
+  outline: none
 
 .hero
   h1
@@ -48,6 +52,29 @@ a
     font-family: 'Source Sans Pro',sans-serif
     font-weight: 200;
 
+.custom-btn
+  color: #fff
+  font-family: 'Noto Sans SC', sans-serif
+  font-weight: 800
+  background-color: hsla(0,0%,100%,.3)
+  border-radius: 4px
+  line-height: 100%
+  display: inline-flex
+  align-items: center
+
+  > .custom-btn-icon
+    font-size: 1.5em;
+  .custom-btn--separate
+    padding-right: 6px
+  
+  &:hover
+    background-color: hsla(0,0%,100%,.4)
+  &.hover-darken:hover
+    background-color: hsla(0,0%,100%,.2)
+
+.custom-top-menu-left
+  > * 
+    margin-right: 4px
 
 .auth-page-wrapper
   background-color: #F9FAFC
@@ -66,8 +93,7 @@ a
   padding: 2em 0
 
 #top-bar.user-tools-active
-  padding-top: 0
-  padding-bottom: 0
+  padding: 4px
 
 .margin-t-50
   margin-top: 50px
@@ -218,6 +244,37 @@ a
 .btn-icon
   font-size: 1.1em
   margin: 0 8px
+
+.not-implemented-wrapper
+  position: relative
+  > .not-implemented-event-blocker
+    cursor: not-allowed
+    z-index: 10
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+      
+.menu-list
+  li
+    margin-bottom: 4px
+    a
+      font-weight: 600
+    &:hover
+      a:not(.is-active)
+        background-color: rgba(9,30,66,.08)
+  
+.personal-board-container
+  margin-top: 24px
+.overlay
+  position: fixed
+  top: 0
+  left: 0
+  bottom: 0
+  right: 0
+  background: rgba(0, 0, 0, 0.5)
+// MEDIA QUERIES
 +tablet
   .hero-body
     > .container

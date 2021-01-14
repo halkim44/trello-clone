@@ -1,8 +1,31 @@
 
 Todo:
   ✘ Item @cancelled(21-01-03 00:26)
+  ☐ fix card data not updating card groups after successfull drag to another list 
+
+Top Menu:
+  ✔ home button icons @done(21-01-05 19:41)
+  ☐ boards quick menu @started(21-01-05 19:43)
+  ☐ mello logo is faded when idle, and 1.0 opacity when hovered
+  ☐ search bar
+  ☐ create plus button
+  ☐ account logo
+  ☐ account menu
+
+TESTS:
+  ☐ login page @started(21-01-07 19:35)
+  ☐ register page
+  ☐ boards page
+  ☐ board workspace page
+
+Boards quick menu:
+  ☐ recent boards section
+  ☐ personal boards section
+  ☐ create new board button
+  ☐ see closed(archived) boards
+  ☐ minimize list
 
 BEFORE DEPLOYING:
-  ☐ README: update readme <a> links
-  ☐ README: update readme img src
+  ✔ README: update readme <a> links @done(21-01-04 22:12)
+  ✔ README: update readme img src @done(21-01-04 22:12)
   ☐ README: put screenshots

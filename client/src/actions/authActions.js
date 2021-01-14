@@ -2,12 +2,11 @@ import { setAuthToken } from "../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
 import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING } from "./types";
 import { setCurrentBoards } from "./boardActions";
-import { serverAPI } from "../services/serverAPI";
+import { requestSignup, requestLogin } from "../services/api/user";
 // Register User
 export const registerUser = (userData, history) => (dispatch) => {
-  serverAPI
-    .post("/user/register", userData)
-    .then((res) => history.push("/login")) // re-direct to login on successful register
+  requestSignup(userData)
+    .then(() => history.push("/login")) // re-direct to login on successful register
     .catch((err) =>
       dispatch({
         type: GET_ERRORS,
@@ -17,8 +16,7 @@ export const registerUser = (userData, history) => (dispatch) => {
 };
 // Login - get user token
 export const loginUser = (userData) => (dispatch) => {
-  serverAPI
-    .post("/user/login", userData)
+  requestLogin(userData)
     .then((res) => {
       // Save to localStorage
       // Set token to localStorage

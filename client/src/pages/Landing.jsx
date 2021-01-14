@@ -1,8 +1,8 @@
 import React from "react";
 import { Link, Redirect } from "react-router-dom";
-import { Navbar } from "../components/layout/Navbar";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { TopMenu } from "../components/TopMenu";
 
 const Landing = ({ auth }) => {
   return (
@@ -11,7 +11,7 @@ const Landing = ({ auth }) => {
         <Redirect to={`/${auth.userFullName}/boards`} />
       ) : (
         <div>
-          <Navbar />
+          <TopMenu />
           <section className="hero is-info is-fullheight">
             <div className="hero-body  has-text-center-mobile">
               <div className="container">
@@ -25,7 +25,7 @@ const Landing = ({ auth }) => {
                 </p>
                 <Link to="/register">
                   <button className="button is-success is-size-5">
-                    Sign Up ― It's Free!
+                    Sign Up ― It&apos;s Free!
                   </button>
                 </Link>
               </div>

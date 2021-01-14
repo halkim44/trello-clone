@@ -12,7 +12,7 @@ dependencies:
   passport-jwt: 4.0.0
   validator: 13.5.2
 devDependencies:
-  nodemon: 2.0.6
+  nodemon: 2.0.7
 lockfileVersion: 5.2
 packages:
   /@sindresorhus/is/0.14.0:
@@ -113,12 +113,12 @@ packages:
     dev: false
     resolution:
       integrity: sha1-mrVie5PmBiH/fNrF2pczAn3x0Ms=
-  /binary-extensions/2.1.0:
+  /binary-extensions/2.2.0:
     dev: true
     engines:
       node: '>=8'
     resolution:
-      integrity: sha512-1Yj8h9Q+QDF5FzhMs/c9+6UntbD5MkRfRwac8DoEm9ZfUBZ7tZ55YcGVAzEe4bXsdQHEk+s9S5wsOKVdZrw0tQ==
+      integrity: sha512-jDctJ/IVQbZoJykoeHbhXpOlNBqGNcwXJKJog42E5HDPUwQTSdjCHdihjj0DlnheQ7blbT6dHOafNAiS8ooQKA==
   /bl/2.2.1:
     dependencies:
       readable-stream: 2.3.7
@@ -231,7 +231,7 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-4D3B6Wf41KOYRFdszmDqMCGq5VV/uMAB273JILmO+3jAlh8X4qDtdtgCR3fxtbLEMzSx22QdhnDcJvu2u1fVwg==
-  /chokidar/3.4.3:
+  /chokidar/3.5.0:
     dependencies:
       anymatch: 3.1.1
       braces: 3.0.2
@@ -244,9 +244,9 @@ packages:
     engines:
       node: '>= 8.10.0'
     optionalDependencies:
-      fsevents: 2.1.3
+      fsevents: 2.3.1
     resolution:
-      integrity: sha512-DtM3g7juCXQxFVSNPNByEC2+NImtBuxQQvWlHunpJIS5Ocr0lG306cC7FCi7cEA0fzmybPUIl4txBIobk1gGOQ==
+      integrity: sha512-JgQM9JS92ZbFR4P90EvmzNpSGhpPBGBSj10PILeDyYFwp4h2/D9OM03wsJ4zW1fEp4ka2DGrnUeD7FuvQ2aZ2Q==
   /ci-info/2.0.0:
     dev: true
     resolution:
@@ -587,8 +587,7 @@ packages:
       node: '>= 0.6'
     resolution:
       integrity: sha1-PYyt2Q2XZWn6g1qx+OSyOhBWBac=
-  /fsevents/2.1.3:
-    deprecated: Please update to v 2.2.x
+  /fsevents/2.3.1:
     dev: true
     engines:
       node: ^8.16.0 || ^10.6.0 || >=11.0.0
@@ -596,7 +595,7 @@ packages:
     os:
       - darwin
     resolution:
-      integrity: sha512-Auw9a4AxqWpa9GUfj370BMPzzyncfBABW8Mab7BGWBYDj4Isgq+cDKtx0i6u9jcX9pQDnswsaaOTgTmA5pEjuQ==
+      integrity: sha512-YR47Eg4hChJGAB1O3yEAOkGO+rlzutoICGqGo9EZ4lKWokzZRSyIW1QmTzqjtw8MJdj9srP869CuWw/hyzSiBw==
   /function-bind/1.1.1:
     dev: false
     resolution:
@@ -770,7 +769,7 @@ packages:
       integrity: sha1-d8mYQFJ6qOyxqLppe4BkWnqSap0=
   /is-binary-path/2.1.0:
     dependencies:
-      binary-extensions: 2.1.0
+      binary-extensions: 2.2.0
     dev: true
     engines:
       node: '>=8'
@@ -1140,9 +1139,9 @@ packages:
       node: '>= 0.6'
     resolution:
       integrity: sha512-hZXc7K2e+PgeI1eDBe/10Ard4ekbfrrqG8Ep+8Jmf4JID2bNg7NvCPOZN+kfF574pFQI7mum2AUqDidoKqcTOw==
-  /nodemon/2.0.6:
+  /nodemon/2.0.7:
     dependencies:
-      chokidar: 3.4.3
+      chokidar: 3.5.0
       debug: 3.2.7
       ignore-by-default: 1.0.1
       minimatch: 3.0.4
@@ -1158,7 +1157,7 @@ packages:
     hasBin: true
     requiresBuild: true
     resolution:
-      integrity: sha512-4I3YDSKXg6ltYpcnZeHompqac4E6JeAMpGm8tJnB9Y3T0ehasLa4139dJOcCrB93HHrUMsCrKtoAlXTqT5n4AQ==
+      integrity: sha512-XHzK69Awgnec9UzHr1kc8EomQh4sjTQ8oRf8TsGrSmHDx9/UmiGG9E/mM3BuTfNeFwdNBvrqQq/RHL0xIeyFOA==
   /nopt/1.0.10:
     dependencies:
       abbrev: 1.1.1
@@ -1892,7 +1891,7 @@ specifiers:
   is-empty: ^1.2.0
   jsonwebtoken: ^8.5.1
   mongoose: ^5.9.27
-  nodemon: ^2.0.4
+  nodemon: ^2.0.7
   passport: ^0.4.1
   passport-jwt: ^4.0.0
   validator: ^13.1.1
